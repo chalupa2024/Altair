@@ -1325,6 +1325,10 @@
                 <label>Email</label>
                 <input type="email" id="ctaEmail" placeholder="jane@company.com">
               </div>
+              <div class="form-group full">
+                <label>LinkedIn Profile</label>
+                <input type="url" id="ctaLinkedIn" placeholder="https://linkedin.com/in/janesmith">
+              </div>
               <div class="form-nav-row">
                 <button class="btn btn-ghost form-back-btn">← Back</button>
                 <button class="btn btn-primary form-submit-btn" disabled>Get My Evaluation →</button>
@@ -1767,7 +1771,7 @@
     });
 
     // Step 3 input validation
-    const ctaInputs = ['ctaFirstName', 'ctaLastName', 'ctaEmail'];
+    const ctaInputs = ['ctaFirstName', 'ctaLastName', 'ctaEmail', 'ctaLinkedIn'];
     ctaInputs.forEach(id => {
       const input = document.getElementById(id);
       if (input) {
