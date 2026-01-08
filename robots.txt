@@ -1,0 +1,10 @@
+# Altair Concierge - robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://altairconcierge.com/sitemap.xml
+
+# Crawl-delay (optional, for politeness)
+Crawl-delay: 1
