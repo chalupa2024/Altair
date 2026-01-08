@@ -1808,11 +1808,44 @@
     // Submit button
     const submitBtn = ctaForm.querySelector('.form-submit-btn');
     if (submitBtn) {
-      submitBtn.addEventListener('click', () => {
-        const currentStepEl = ctaForm.querySelector('.form-step.active');
-        currentStepEl.classList.remove('active');
-        const successEl = ctaForm.querySelector('[data-form-step="success"]');
-        if (successEl) successEl.classList.add('active');
+      submitBtn.addEventListener('click', async () => {
+        // Collect form data
+        const step1Selection = ctaForm.querySelector('[data-form-step="1"] .form-option.selected');
+        const step2Selection = ctaForm.querySelector('[data-form-step="2"] .form-option.selected');
+
+        const formData = {
+          type: step1Selection ? step1Selection.dataset.value : '',
+          goal: step2Selection ? step2Selection.dataset.value : '',
+          firstName: document.getElementById('ctaFirstName').value.trim(),
+          lastName: document.getElementById('ctaLastName').value.trim(),
+          email: document.getElementById('ctaEmail').value.trim(),
+          linkedin: document.getElementById('ctaLinkedIn').value.trim()
+        };
+
+        // Show loading state
+        submitBtn.textContent = 'Submitting...';
+        submitBtn.disabled = true;
+
+        try {
+          // Send to Google Sheets
+          await fetch('https://script.google.com/macros/s/AKfycbw16KqEvWc4-bXiqapJLvBA-aAeo-a87UxZKekIYMRmzPXGG892pgxU0Q-1m1Fde9z-kA/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+          });
+
+          // Show success
+          const currentStepEl = ctaForm.querySelector('.form-step.active');
+          currentStepEl.classList.remove('active');
+          const successEl = ctaForm.querySelector('[data-form-step="success"]');
+          if (successEl) successEl.classList.add('active');
+        } catch (error) {
+          console.error('Form submission error:', error);
+          submitBtn.textContent = 'Get My Evaluation →';
+          submitBtn.disabled = false;
+          alert('Something went wrong. Please try again.');
+        }
       });
     }
   </script>
