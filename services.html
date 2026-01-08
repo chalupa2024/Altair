@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Immigration Services | Altair Concierge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #030308;
+      --bg-secondary: #0a0a12;
+      --bg-tertiary: #12121c;
+      --border: #1e1e2e;
+      --gray-200: #C8C8D0;
+      --gray-300: #8E8E9A;
+      --gray-400: #6B6B78;
+      --gray-500: #4A4A55;
+      --cyan: #5FD9FF;
+      --blue: #2F6BFF;
+      --purple: #5A35FF;
+      --white: #FFFFFF;
+      --success: #34D399;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--gray-200);
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.25rem 2.5rem;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(3, 3, 8, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      text-decoration: none;
+    }
+
+    .logo-mark { width: 44px; height: 44px; }
+    .logo-text {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 0.35rem;
+    }
+
+    .logo-altair {
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #fff;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+
+    .logo-concierge {
+      font-weight: 500;
+      font-size: 0.75rem;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 40px rgba(47, 107, 255, 0.5), 0 0 80px rgba(90, 53, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.3);
+      color: #fff;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 10rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150%;
+      height: 100%;
+      background: radial-gradient(ellipse at center top, rgba(47, 107, 255, 0.15), transparent 60%);
+      pointer-events: none;
+    }
+
+    .page-header-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .page-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      line-height: 1.1;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      color: var(--gray-300);
+      max-width: 550px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Services Overview */
+    .services-overview {
+      padding: 4rem 2rem;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .services-overview-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .overview-stat {
+      padding: 1.5rem;
+    }
+
+    .overview-stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .overview-stat-label {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+    }
+
+    /* Visa Categories */
+    .visa-categories {
+      padding: 6rem 2rem;
+    }
+
+    .visa-categories-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .category-section {
+      margin-bottom: 5rem;
+    }
+
+    .category-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .category-header {
+      margin-bottom: 2rem;
+    }
+
+    .category-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--cyan);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .category-header h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    /* Visa Cards */
+    .visa-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .visa-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--purple));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .visa-card:hover {
+      border-color: var(--gray-500);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .visa-card:hover::before {
+      opacity: 1;
+    }
+
+    .visa-card-main h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .visa-badge {
+      font-size: 0.7rem;
+      padding: 0.3rem 0.6rem;
+      background: rgba(95, 217, 255, 0.15);
+      color: var(--cyan);
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .visa-badge.popular {
+      background: rgba(90, 53, 255, 0.2);
+      color: #A78BFA;
+    }
+
+    .visa-card-main .subtitle {
+      font-size: 1rem;
+      color: var(--gray-400);
+      margin-bottom: 1.25rem;
+    }
+
+    .visa-card-main p {
+      font-size: 0.95rem;
+      color: var(--gray-300);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .visa-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .visa-feature {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.8rem;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--gray-300);
+    }
+
+    .visa-card-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .detail-block {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+
+    .detail-block h4 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray-400);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .detail-block ul {
+      list-style: none;
+    }
+
+    .detail-block li {
+      font-size: 0.9rem;
+      color: var(--gray-200);
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .detail-block li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+      font-size: 0.8rem;
+    }
+
+    .timeline-row {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .timeline-item {
+      flex: 1;
+      text-align: center;
+      padding: 0.75rem;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+    }
+
+    .timeline-item span {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-item strong {
+      font-size: 1rem;
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    /* Comparison Section */
+    .comparison {
+      padding: 6rem 2rem;
+      background: var(--bg-secondary);
+    }
+
+    .comparison-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .comparison-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .comparison-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .comparison-header p {
+      color: var(--gray-300);
+      font-size: 1.1rem;
+    }
+
+    .comparison-table {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison-row:last-child {
+      border-bottom: none;
+    }
+
+    .comparison-row.header {
+      background: var(--bg-tertiary);
+    }
+
+    .comparison-cell {
+      padding: 1.25rem 1rem;
+      font-size: 0.9rem;
+      color: var(--gray-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .comparison-cell:first-child {
+      justify-content: flex-start;
+      text-align: left;
+      padding-left: 1.5rem;
+      font-weight: 500;
+      color: var(--gray-200);
+    }
+
+    .comparison-row.header .comparison-cell {
+      font-weight: 600;
+      color: var(--white);
+      font-size: 0.95rem;
+    }
+
+    .check {
+      color: var(--success);
+      font-size: 1.1rem;
+    }
+
+    .partial {
+      color: var(--gray-500);
+      font-size: 0.8rem;
+    }
+
+    /* FAQ Section */
+    .faq {
+      padding: 6rem 2rem;
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .faq-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .faq-header p {
+      color: var(--gray-300);
+      font-size: 1.1rem;
+    }
+
+    .faq-item {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .faq-item:hover {
+      border-color: var(--gray-500);
+    }
+
+    .faq-question {
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      color: var(--white);
+      font-size: 1rem;
+    }
+
+    .faq-question::after {
+      content: '+';
+      font-size: 1.5rem;
+      color: var(--gray-400);
+      transition: transform 0.3s;
+    }
+
+    .faq-item.active .faq-question::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+    }
+
+    .faq-answer-content {
+      padding: 0 1.5rem 1.5rem;
+      color: var(--gray-300);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: 6rem 2rem;
+      background: var(--bg-secondary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150%;
+      height: 100%;
+      background: radial-gradient(ellipse at center bottom, rgba(90, 53, 255, 0.15), transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta-container {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      font-size: 1.1rem;
+      color: var(--gray-300);
+      margin-bottom: 2rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem 2rem 2rem;
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .footer-brand p {
+      color: var(--gray-400);
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      max-width: 280px;
+      line-height: 1.6;
+    }
+
+    .footer-links h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      color: var(--gray-300);
+      font-weight: 600;
+    }
+
+    .footer-links a {
+      display: block;
+      color: var(--gray-400);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 0.6rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--cyan); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--gray-500);
+    }
+
+    .footer-legal a {
+      color: var(--gray-500);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      transition: color 0.2s;
+    }
+
+    .footer-legal a:hover { color: var(--gray-300); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .visa-card {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .services-overview-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .comparison-row {
+        grid-template-columns: 1.2fr repeat(4, 1fr);
+      }
+      .comparison-cell {
+        padding: 1rem 0.5rem;
+        font-size: 0.8rem;
+      }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links a:not(.btn) { display: none; }
+      .page-header { padding: 8rem 1.5rem 4rem; }
+      .page-header h1 { font-size: 2rem; }
+      section { padding: 4rem 1.5rem; }
+      .visa-card { padding: 1.5rem; }
+      .comparison-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .comparison-row.header { display: none; }
+      .comparison-cell {
+        padding: 0.75rem 1rem;
+        justify-content: space-between;
+      }
+      .comparison-cell:first-child {
+        background: var(--bg-tertiary);
+        font-weight: 600;
+      }
+      .comparison-cell::before {
+        content: attr(data-label);
+        font-weight: 500;
+        color: var(--gray-400);
+      }
+      .cta-buttons { flex-direction: column; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+      .footer-legal a { margin: 0 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">
+      <svg class="logo-mark" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1024" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#2F6BFF"/>
+            <stop offset="0.55" stop-color="#2752FF"/>
+            <stop offset="1" stop-color="#5A35FF"/>
+          </linearGradient>
+          <linearGradient id="beamGrad" x1="512" y1="290" x2="512" y2="860" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#B8FFF7"/>
+            <stop offset="0.55" stop-color="#5FD9FF" stop-opacity="0.95"/>
+            <stop offset="1" stop-color="#7A4DFF" stop-opacity="0.95"/>
+          </linearGradient>
+          <linearGradient id="sideBeamGrad" x1="512" y1="300" x2="512" y2="900" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#A7FFF1" stop-opacity="0.55"/>
+            <stop offset="1" stop-color="#6A45FF" stop-opacity="0.55"/>
+          </linearGradient>
+          <clipPath id="clip">
+            <rect x="160" y="160" width="704" height="704" rx="160"/>
+          </clipPath>
+        </defs>
+        <g clip-path="url(#clip)">
+          <rect x="160" y="160" width="704" height="704" rx="160" fill="url(#bgGrad)"/>
+          <path d="M512 304 L230 860 L512 860 Z" fill="url(#sideBeamGrad)"/>
+          <path d="M512 304 L794 860 L512 860 Z" fill="url(#sideBeamGrad)"/>
+          <path d="M512 304 L400 860 L624 860 Z" fill="url(#beamGrad)"/>
+          <path d="M512 250 C526 280 548 302 578 312 C548 322 526 346 512 378 C498 346 476 322 446 312 C476 302 498 280 512 250 Z" fill="#FFFFFF"/>
+        </g>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-altair">Altair</span>
+        <span class="logo-concierge">Concierge</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="services.html" class="active">Services</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="index.html#contact" class="btn btn-primary">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="page-header-content">
+      <div class="page-label">Immigration Services</div>
+      <h1>Every visa type. One expert team.</h1>
+      <p>From work visas to green cards, we handle the full spectrum of employment-based immigration with precision and care.</p>
+    </div>
+  </header>
+
+  <!-- Overview Stats -->
+  <section class="services-overview">
+    <div class="services-overview-container">
+      <div class="overview-stat">
+        <div class="overview-stat-number">6+</div>
+        <div class="overview-stat-label">Visa Categories</div>
+      </div>
+      <div class="overview-stat">
+        <div class="overview-stat-number">98%</div>
+        <div class="overview-stat-label">Approval Rate</div>
+      </div>
+      <div class="overview-stat">
+        <div class="overview-stat-number">14 days</div>
+        <div class="overview-stat-label">Average Prep Time</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visa Categories -->
+  <section class="visa-categories">
+    <div class="visa-categories-container">
+
+      <!-- Work Visas -->
+      <div class="category-section">
+        <div class="category-header">
+          <div class="category-label">Work Visas</div>
+          <h2>Temporary Work Authorization</h2>
+        </div>
+
+        <!-- O-1A -->
+        <div class="visa-card" id="o1a">
+          <div class="visa-card-main">
+            <h3>O-1A Visa <span class="visa-badge popular">Popular</span></h3>
+            <div class="subtitle">Extraordinary Ability in Sciences, Business, or Education</div>
+            <p>The O-1A visa is designed for individuals who have risen to the top of their field. Ideal for founders, researchers, engineers, and executives with demonstrated extraordinary ability.</p>
+            <div class="visa-features">
+              <span class="visa-feature">No lottery</span>
+              <span class="visa-feature">No degree required</span>
+              <span class="visa-feature">Dual intent</span>
+              <span class="visa-feature">3-year validity</span>
+              <span class="visa-feature">Premium processing</span>
+            </div>
+            <a href="index.html#contact" class="btn btn-primary">Check Eligibility →</a>
+          </div>
+          <div class="visa-card-details">
+            <div class="detail-block">
+              <h4>Key Requirements</h4>
+              <ul>
+                <li>Major awards or prizes in your field</li>
+                <li>Published articles about your work</li>
+                <li>Judging the work of others</li>
+                <li>Original contributions of significance</li>
+                <li>High salary or remuneration</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Timeline</h4>
+              <div class="timeline-row">
+                <div class="timeline-item">
+                  <span>Prep</span>
+                  <strong>2-4 wks</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>Standard</span>
+                  <strong>2-4 mo</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>Premium</span>
+                  <strong>15 days</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- H-1B -->
+        <div class="visa-card" id="h1b">
+          <div class="visa-card-main">
+            <h3>H-1B Visa</h3>
+            <div class="subtitle">Specialty Occupation Workers</div>
+            <p>The most common work visa for professionals in specialty occupations. Requires a bachelor's degree or equivalent and a job offer from a U.S. employer in a related field.</p>
+            <div class="visa-features">
+              <span class="visa-feature">Bachelor's required</span>
+              <span class="visa-feature">Employer sponsored</span>
+              <span class="visa-feature">6-year max</span>
+              <span class="visa-feature">Lottery (March)</span>
+              <span class="visa-feature">Cap-exempt options</span>
+            </div>
+            <a href="index.html#contact" class="btn btn-primary">Check Eligibility →</a>
+          </div>
+          <div class="visa-card-details">
+            <div class="detail-block">
+              <h4>Key Requirements</h4>
+              <ul>
+                <li>Bachelor's degree or equivalent</li>
+                <li>Job in a specialty occupation</li>
+                <li>Employer must file LCA</li>
+                <li>Prevailing wage compliance</li>
+                <li>Valid job offer from U.S. employer</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Timeline</h4>
+              <div class="timeline-row">
+                <div class="timeline-item">
+                  <span>Lottery</span>
+                  <strong>March</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>Start</span>
+                  <strong>Oct 1</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>Premium</span>
+                  <strong>15 days</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TN -->
+        <div class="visa-card" id="tn">
+          <div class="visa-card-main">
+            <h3>TN Visa</h3>
+            <div class="subtitle">USMCA Professionals (Canada & Mexico)</div>
+            <p>Fast-track work authorization for Canadian and Mexican citizens in designated professional occupations under the United States-Mexico-Canada Agreement.</p>
+            <div class="visa-features">
+              <span class="visa-feature">No lottery</span>
+              <span class="visa-feature">No petition required</span>
+              <span class="visa-feature">3-year validity</span>
+              <span class="visa-feature">Unlimited renewals</span>
+              <span class="visa-feature">Port of entry approval</span>
+            </div>
+            <a href="index.html#contact" class="btn btn-primary">Check Eligibility →</a>
+          </div>
+          <div class="visa-card-details">
+            <div class="detail-block">
+              <h4>Key Requirements</h4>
+              <ul>
+                <li>Canadian or Mexican citizenship</li>
+                <li>Job in USMCA profession list</li>
+                <li>Required credentials for profession</li>
+                <li>Job offer from U.S. employer</li>
+                <li>Temporary intent to work</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Timeline</h4>
+              <div class="timeline-row">
+                <div class="timeline-item">
+                  <span>Prep</span>
+                  <strong>1-2 wks</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>Canada</span>
+                  <strong>Same day</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>Mexico</span>
+                  <strong>2-4 wks</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- L-1 -->
+        <div class="visa-card" id="l1">
+          <div class="visa-card-main">
+            <h3>L-1 Visa</h3>
+            <div class="subtitle">Intracompany Transferees</div>
+            <p>For executives, managers, and specialized knowledge employees transferring from a foreign office to a U.S. office of the same company or affiliate.</p>
+            <div class="visa-features">
+              <span class="visa-feature">No lottery</span>
+              <span class="visa-feature">Blanket available</span>
+              <span class="visa-feature">5-7 year max</span>
+              <span class="visa-feature">New office option</span>
+              <span class="visa-feature">Spouse work permit</span>
+            </div>
+            <a href="index.html#contact" class="btn btn-primary">Check Eligibility →</a>
+          </div>
+          <div class="visa-card-details">
+            <div class="detail-block">
+              <h4>Key Requirements</h4>
+              <ul>
+                <li>1 year employment abroad (last 3 years)</li>
+                <li>Manager/executive or specialized knowledge</li>
+                <li>Qualifying relationship between entities</li>
+                <li>Continuing employment with organization</li>
+                <li>Active business operations</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Timeline</h4>
+              <div class="timeline-row">
+                <div class="timeline-item">
+                  <span>Prep</span>
+                  <strong>3-6 wks</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>Standard</span>
+                  <strong>3-5 mo</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>Premium</span>
+                  <strong>15 days</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Green Cards -->
+      <div class="category-section">
+        <div class="category-header">
+          <div class="category-label">Permanent Residence</div>
+          <h2>Green Card Pathways</h2>
+        </div>
+
+        <!-- EB-1A -->
+        <div class="visa-card" id="eb1a">
+          <div class="visa-card-main">
+            <h3>EB-1A Green Card <span class="visa-badge">Self-Petition</span></h3>
+            <div class="subtitle">Extraordinary Ability</div>
+            <p>The premier green card category for individuals at the very top of their field. No employer sponsorship required—you can self-petition based on your achievements.</p>
+            <div class="visa-features">
+              <span class="visa-feature">Self-petition</span>
+              <span class="visa-feature">No labor cert</span>
+              <span class="visa-feature">Priority dates current</span>
+              <span class="visa-feature">Premium processing</span>
+              <span class="visa-feature">Concurrent filing</span>
+            </div>
+            <a href="index.html#contact" class="btn btn-primary">Check Eligibility →</a>
+          </div>
+          <div class="visa-card-details">
+            <div class="detail-block">
+              <h4>Key Requirements</h4>
+              <ul>
+                <li>Sustained national/international acclaim</li>
+                <li>Meet 3 of 10 criteria (or major award)</li>
+                <li>Continuing work in area of expertise</li>
+                <li>Will substantially benefit the U.S.</li>
+                <li>Extensive documentation of achievements</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Timeline</h4>
+              <div class="timeline-row">
+                <div class="timeline-item">
+                  <span>Prep</span>
+                  <strong>4-8 wks</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>I-140</span>
+                  <strong>15 days*</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>Total</span>
+                  <strong>6-12 mo</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EB-2 NIW -->
+        <div class="visa-card" id="eb2niw">
+          <div class="visa-card-main">
+            <h3>EB-2 NIW Green Card <span class="visa-badge">Self-Petition</span></h3>
+            <div class="subtitle">National Interest Waiver</div>
+            <p>A flexible green card path for professionals whose work benefits the United States. No job offer or labor certification required—ideal for entrepreneurs and researchers.</p>
+            <div class="visa-features">
+              <span class="visa-feature">Self-petition</span>
+              <span class="visa-feature">No job offer needed</span>
+              <span class="visa-feature">No labor cert</span>
+              <span class="visa-feature">Entrepreneurs eligible</span>
+              <span class="visa-feature">STEM advantage</span>
+            </div>
+            <a href="index.html#contact" class="btn btn-primary">Check Eligibility →</a>
+          </div>
+          <div class="visa-card-details">
+            <div class="detail-block">
+              <h4>Key Requirements (Matter of Dhanasar)</h4>
+              <ul>
+                <li>Substantial merit and national importance</li>
+                <li>Well positioned to advance the endeavor</li>
+                <li>Beneficial to waive job offer requirement</li>
+                <li>Advanced degree or exceptional ability</li>
+                <li>Clear plan and track record</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Timeline</h4>
+              <div class="timeline-row">
+                <div class="timeline-item">
+                  <span>Prep</span>
+                  <strong>4-8 wks</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>I-140</span>
+                  <strong>6-12 mo</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>Total</span>
+                  <strong>1-3 yrs</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Treaty Visas -->
+      <div class="category-section">
+        <div class="category-header">
+          <div class="category-label">Treaty Visas</div>
+          <h2>Country-Specific Options</h2>
+        </div>
+
+        <!-- E-2 -->
+        <div class="visa-card" id="e2">
+          <div class="visa-card-main">
+            <h3>E-2 Visa</h3>
+            <div class="subtitle">Treaty Investor</div>
+            <p>For entrepreneurs and investors from treaty countries making a substantial investment in a U.S. business. Popular for founders starting or acquiring companies.</p>
+            <div class="visa-features">
+              <span class="visa-feature">No lottery</span>
+              <span class="visa-feature">Spouse work permit</span>
+              <span class="visa-feature">5-year validity</span>
+              <span class="visa-feature">Unlimited renewals</span>
+              <span class="visa-feature">Treaty country required</span>
+            </div>
+            <a href="index.html#contact" class="btn btn-primary">Check Eligibility →</a>
+          </div>
+          <div class="visa-card-details">
+            <div class="detail-block">
+              <h4>Key Requirements</h4>
+              <ul>
+                <li>Citizen of treaty country</li>
+                <li>Substantial investment (no minimum)</li>
+                <li>Investment must be "at risk"</li>
+                <li>Business must be real and operating</li>
+                <li>Intent to depart when status ends</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Timeline</h4>
+              <div class="timeline-row">
+                <div class="timeline-item">
+                  <span>Prep</span>
+                  <strong>4-8 wks</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>Consular</span>
+                  <strong>2-8 wks</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>Total</span>
+                  <strong>2-4 mo</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- E-3 -->
+        <div class="visa-card" id="e3">
+          <div class="visa-card-main">
+            <h3>E-3 Visa</h3>
+            <div class="subtitle">Australian Specialty Workers</div>
+            <p>An H-1B alternative exclusively for Australian citizens. Offers similar benefits with a separate annual cap and simpler renewal process.</p>
+            <div class="visa-features">
+              <span class="visa-feature">Australians only</span>
+              <span class="visa-feature">Separate cap (10,500)</span>
+              <span class="visa-feature">2-year validity</span>
+              <span class="visa-feature">Unlimited renewals</span>
+              <span class="visa-feature">Spouse work permit</span>
+            </div>
+            <a href="index.html#contact" class="btn btn-primary">Check Eligibility →</a>
+          </div>
+          <div class="visa-card-details">
+            <div class="detail-block">
+              <h4>Key Requirements</h4>
+              <ul>
+                <li>Australian citizenship</li>
+                <li>Bachelor's degree or equivalent</li>
+                <li>Job in specialty occupation</li>
+                <li>LCA from employer</li>
+                <li>Legitimate job offer</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h4>Timeline</h4>
+              <div class="timeline-row">
+                <div class="timeline-item">
+                  <span>Prep</span>
+                  <strong>1-2 wks</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>LCA</span>
+                  <strong>7 days</strong>
+                </div>
+                <div class="timeline-item">
+                  <span>Consular</span>
+                  <strong>1-2 wks</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section class="comparison">
+    <div class="comparison-container">
+      <div class="comparison-header">
+        <h2>Quick Comparison</h2>
+        <p>Find the right visa for your situation</p>
+      </div>
+      <div class="comparison-table">
+        <div class="comparison-row header">
+          <div class="comparison-cell">Feature</div>
+          <div class="comparison-cell">O-1A</div>
+          <div class="comparison-cell">H-1B</div>
+          <div class="comparison-cell">EB-1A</div>
+          <div class="comparison-cell">EB-2 NIW</div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell">Self-petition</div>
+          <div class="comparison-cell" data-label="O-1A"><span class="partial">Agent OK</span></div>
+          <div class="comparison-cell" data-label="H-1B">—</div>
+          <div class="comparison-cell" data-label="EB-1A"><span class="check">✓</span></div>
+          <div class="comparison-cell" data-label="EB-2 NIW"><span class="check">✓</span></div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell">No lottery</div>
+          <div class="comparison-cell" data-label="O-1A"><span class="check">✓</span></div>
+          <div class="comparison-cell" data-label="H-1B">—</div>
+          <div class="comparison-cell" data-label="EB-1A"><span class="check">✓</span></div>
+          <div class="comparison-cell" data-label="EB-2 NIW"><span class="check">✓</span></div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell">No degree required</div>
+          <div class="comparison-cell" data-label="O-1A"><span class="check">✓</span></div>
+          <div class="comparison-cell" data-label="H-1B">—</div>
+          <div class="comparison-cell" data-label="EB-1A"><span class="check">✓</span></div>
+          <div class="comparison-cell" data-label="EB-2 NIW">—</div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell">Premium processing</div>
+          <div class="comparison-cell" data-label="O-1A"><span class="check">✓</span></div>
+          <div class="comparison-cell" data-label="H-1B"><span class="check">✓</span></div>
+          <div class="comparison-cell" data-label="EB-1A"><span class="check">✓</span></div>
+          <div class="comparison-cell" data-label="EB-2 NIW">—</div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell">Permanent residence</div>
+          <div class="comparison-cell" data-label="O-1A">—</div>
+          <div class="comparison-cell" data-label="H-1B">—</div>
+          <div class="comparison-cell" data-label="EB-1A"><span class="check">✓</span></div>
+          <div class="comparison-cell" data-label="EB-2 NIW"><span class="check">✓</span></div>
+        </div>
+        <div class="comparison-row">
+          <div class="comparison-cell">Best for founders</div>
+          <div class="comparison-cell" data-label="O-1A"><span class="check">✓</span></div>
+          <div class="comparison-cell" data-label="H-1B">—</div>
+          <div class="comparison-cell" data-label="EB-1A"><span class="check">✓</span></div>
+          <div class="comparison-cell" data-label="EB-2 NIW"><span class="check">✓</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="faq-container">
+      <div class="faq-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Common questions about our immigration services</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How do I know which visa is right for me?</div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            The best visa depends on your background, goals, and timeline. During your free evaluation, we'll assess your qualifications and recommend the optimal pathway. Factors include your nationality, education, work experience, achievements, and whether you need temporary status or permanent residence.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What is premium processing and should I use it?</div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Premium processing is an optional service that guarantees USCIS will process your petition within 15 business days for an additional fee ($2,805 as of 2024). We recommend it for most clients who need faster timelines or certainty. It's available for O-1, H-1B, L-1, and EB-1 petitions.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I apply for multiple visa types simultaneously?</div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Yes, in many cases you can pursue multiple pathways at once. For example, you might apply for an O-1A visa for immediate work authorization while also filing an EB-1A green card petition for permanent residence. We often recommend this dual-track strategy for clients with strong profiles.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Do I need a job offer for all visa types?</div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            No. While H-1B and L-1 visas require employer sponsorship, the O-1A can be filed through an agent, and both EB-1A and EB-2 NIW green cards allow self-petitioning without a specific job offer. This makes these options popular with founders and entrepreneurs.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What happens if my petition is denied?</div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            With our 98% approval rate, denials are rare. However, if a petition is denied, you typically have options: filing an appeal, submitting a motion to reopen with additional evidence, or refiling with a stronger case. We work with you to determine the best path forward.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-container">
+      <h2>Not sure which visa is right for you?</h2>
+      <p>Get a free evaluation from our team. We'll review your background and recommend the best pathway for your situation.</p>
+      <div class="cta-buttons">
+        <a href="index.html#contact" class="btn btn-primary">Get Free Evaluation →</a>
+        <a href="index.html#process" class="btn btn-secondary">Learn About Our Process</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <svg class="logo-mark" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="bgGrad2" x1="0" y1="0" x2="0" y2="1024" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#2F6BFF"/>
+                  <stop offset="0.55" stop-color="#2752FF"/>
+                  <stop offset="1" stop-color="#5A35FF"/>
+                </linearGradient>
+                <linearGradient id="beamGrad2" x1="512" y1="290" x2="512" y2="860" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#B8FFF7"/>
+                  <stop offset="0.55" stop-color="#5FD9FF" stop-opacity="0.95"/>
+                  <stop offset="1" stop-color="#7A4DFF" stop-opacity="0.95"/>
+                </linearGradient>
+                <linearGradient id="sideBeamGrad2" x1="512" y1="300" x2="512" y2="900" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#A7FFF1" stop-opacity="0.55"/>
+                  <stop offset="1" stop-color="#6A45FF" stop-opacity="0.55"/>
+                </linearGradient>
+                <clipPath id="clip2">
+                  <rect x="160" y="160" width="704" height="704" rx="160"/>
+                </clipPath>
+              </defs>
+              <g clip-path="url(#clip2)">
+                <rect x="160" y="160" width="704" height="704" rx="160" fill="url(#bgGrad2)"/>
+                <path d="M512 304 L230 860 L512 860 Z" fill="url(#sideBeamGrad2)"/>
+                <path d="M512 304 L794 860 L512 860 Z" fill="url(#sideBeamGrad2)"/>
+                <path d="M512 304 L400 860 L624 860 Z" fill="url(#beamGrad2)"/>
+                <path d="M512 250 C526 280 548 302 578 312 C548 322 526 346 512 378 C498 346 476 322 446 312 C476 302 498 280 512 250 Z" fill="#FFFFFF"/>
+              </g>
+            </svg>
+            <div class="logo-text">
+              <span class="logo-altair">Altair</span>
+              <span class="logo-concierge">Concierge</span>
+            </div>
+          </a>
+          <p>Expert-guided immigration for founders, engineers, and operators building in the United States.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <a href="#o1a">O-1A Visa</a>
+          <a href="#h1b">H-1B Visa</a>
+          <a href="#tn">TN Visa</a>
+          <a href="#eb1a">Green Cards</a>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Team</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+        </div>
+        <div class="footer-links">
+          <h4>Contact</h4>
+          <a href="#">hello@altairconcierge.com</a>
+          <a href="#">Schedule a call</a>
+          <a href="#">Twitter</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Altair Concierge</p>
+        <div class="footer-legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const isActive = item.classList.contains('active');
+
+        // Close all items
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+        // Open clicked item if it wasn't active
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
