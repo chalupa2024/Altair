@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Form - Google Sheets Connection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #1a1a2e;
+      color: #fff;
+    }
+    h1 { color: #5FD9FF; }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #aaa;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #333;
+      border-radius: 5px;
+      background: #0a0a12;
+      color: #fff;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #2F6BFF, #5A35FF);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    #status {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 5px;
+      display: none;
+    }
+    #status.success {
+      display: block;
+      background: rgba(52, 211, 153, 0.2);
+      border: 1px solid #34D399;
+      color: #34D399;
+    }
+    #status.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #EF4444;
+      color: #EF4444;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test Form Submission</h1>
+  <p>This will test the connection to your Google Sheet.</p>
+
+  <form id="testForm">
+    <div class="form-group">
+      <label>Type</label>
+      <select id="type">
+        <option value="candidate">Candidate</option>
+        <option value="employer">Employer</option>
+        <option value="founder">Founder</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Goal</label>
+      <select id="goal">
+        <option value="work-visa">Work Visa</option>
+        <option value="green-card">Green Card</option>
+        <option value="extend">Extend/Transfer</option>
+        <option value="not-sure">Not Sure</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" id="firstName" value="Test">
+    </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" id="lastName" value="User">
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" value="test@example.com">
+    </div>
+
+    <div class="form-group">
+      <label>LinkedIn</label>
+      <input type="url" id="linkedin" value="https://linkedin.com/in/testuser">
+    </div>
+
+    <button type="submit" id="submitBtn">Submit Test</button>
+  </form>
+
+  <div id="status"></div>
+
+  <script>
+    const form = document.getElementById('testForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = {
+        type: document.getElementById('type').value,
+        goal: document.getElementById('goal').value,
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        linkedin: document.getElementById('linkedin').value
+      };
+
+      submitBtn.textContent = 'Submitting...';
+      submitBtn.disabled = true;
+      status.className = '';
+      status.style.display = 'none';
+
+      try {
+        await fetch('https://script.google.com/macros/s/AKfycbw16KqEvWc4-bXiqapJLvBA-aAeo-a87UxZKekIYMRmzPXGG892pgxU0Q-1m1Fde9z-kA/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+
+        status.textContent = '✓ Form submitted! Check your Google Sheet for the new row.';
+        status.className = 'success';
+        submitBtn.textContent = 'Submit Test';
+        submitBtn.disabled = false;
+
+      } catch (error) {
+        status.textContent = '✗ Error: ' + error.message;
+        status.className = 'error';
+        submitBtn.textContent = 'Submit Test';
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
